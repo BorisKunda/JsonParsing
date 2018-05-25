@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         AsyncTaskJsonParser asyncTaskJsonParser = new AsyncTaskJsonParser();//instantiate class  READJSON
-        asyncTaskJsonParser.execute("https://api.themoviedb.org/3/search/movie?&query=matrix&api_key=7feab044341d650481d056f7b6fe4441");
+        asyncTaskJsonParser.execute("https://maps.googleapis.com/maps/api/place/textsearch/json?query=gas+station+Ten%20%D7%A8%D7%9E%D7%9C%D7%94&key=AIzaSyDo6e7ZL0HqkwaKN-GwKgqZnW03FhJNivQ");
 
 
 
@@ -56,14 +56,14 @@ public class MainActivity extends AppCompatActivity {
                     JSONArray jsonArrayResults = jsonObjectContainer.getJSONArray("results");//"results" is name of array of movies in json link
 
 
-                    for (int i = 0; i < jsonArrayResults.length(); i++) {
-                        JSONObject resultObject =jsonArrayResults.getJSONObject(i);
-                        JSONArray genres = resultObject.getJSONArray("genre_ids");
-                        for(int b = 0; b < genres.length();b++) {
-                            Log.e("r","genre " + resultObject.getJSONArray("genre_ids"));
-                        }
-                      Log.e("r","result title " + resultObject.get("title"));
-                    }
+
+                        JSONObject resultObject =jsonArrayResults.getJSONObject(0);
+                        JSONObject geometryObject = resultObject.getJSONObject("geometry");
+                        JSONObject locationObject = geometryObject.getJSONObject("location");
+                        Log.e("loc" ," lat " +  locationObject.get("lat") + " lng " +  locationObject.get("lng") );
+
+
+
 
 
                 } catch (JSONException e) {
